@@ -1,4 +1,4 @@
-name: building
+name: Run SonarQube with Maven
 
 on: [push]
 
@@ -6,12 +6,12 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2 #checkout latest version of github actions
-        - name: Set up JDK 11
-          uses: actions/setup-java@v2
+        - uses: actions/checkout@v3 #checkout latest version of github actions
+        - name: Set up JDK 17
+          uses: actions/setup-java@v3
           with:
-            java-version: '11'
-            distribution: 'temurin'
+            java-version: '17'
+            distribution: 'adopt'
             cache: maven
         - name: Build with maven cloud
           run: mvn -B verify sonar:sonar -Dsonar.projectKey=javaprojectreachability-dan -Dsonar.organization=javaprojectreachability-dan -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$SONAR_TOKEN
